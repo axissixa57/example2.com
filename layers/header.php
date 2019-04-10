@@ -28,6 +28,7 @@
 
                                 <?php if ($_SESSION['role'] == 'admin'):  ?>
                                     <a href="<?=url('/web/auth/registry.php'); ?>">Добавить пользователя</a>
+                                    <a href="<?=url('/web/orders/'); ?>">Заказы</a>
                                 <?php endif;?>
 
                                 <a href="<?=url('/web/auth/logout.php'); ?>">Выйти</a>

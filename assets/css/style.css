@@ -6,6 +6,7 @@ html, body {
 	background: #7d7f80;
 }
 
+/* чтобы длина(ширина) не деформировалась, когда добавляется padding  */
 * {
 	box-sizing: border-box;
 }
@@ -27,7 +28,7 @@ nav a:hover {
 }
 
 .page {
-	display:flex;
+	display: flex;
 	flex-direction: column;
 	width: 100%;
 	max-width: 1000px;
@@ -38,7 +39,7 @@ nav a:hover {
 
 .wrapper {
 	width: 100%;
-	display:flex;
+	display: flex;
 	flex: 1 0 auto;
 }
 
@@ -64,6 +65,7 @@ nav a:hover {
 
 .simple-table {
 	width: 100%;
+	/* убирает отступы между ячейками */
 	border-collapse: collapse;
 	border:1px solid #DDD;
 }
@@ -139,6 +141,34 @@ footer {
 
 .submit:hover {
 	background: #ddd1df;
+}
+
+.arrow-top, .arrow-bottom {
+	width: 5px;
+	border: 5px solid transparent;
+	margin: 1px;
+	cursor: pointer;
+}
+
+.arrow-top {
+	border-bottom: 10px solid #212121;
+}
+.arrow-bottom {
+	border-bottom: 10px solid #212121;
+}
+.sort {
+	margin-left: 5px;
+	float: right;
+}
+.arrow-top:hover {
+	border-bottom: 10px solid #666666;
+}
+.arrow-bottom:hover {
+	border-top: 10px solid #666666;
+}
+.td-sort {
+	display: flex;
+	align-items: center;
 }
 
 @media (min-width: 760px) {

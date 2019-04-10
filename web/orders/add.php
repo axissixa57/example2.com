@@ -34,7 +34,7 @@ if(isset($_SESSION['basket']) && $_SESSION['basket']) {
     // если товары в сессии есть, то преобразуем массив в строку
     $ids_products = implode(',', $_SESSION['basket']); // implode() - превратит массив в строку с разделителем из первого параметра
     // используя конструкцию IN ищем в базе товары с id сохраненными в сессии
-    $db->setQuery("SELECT `id`, `name`, `model`, `price`, FROM `products` WHERE `id` IN($ids_products)");
+    $db->setQuery("SELECT `id`, `name`, `model`, `price` FROM `products` WHERE `id` IN($ids_products)");
 
     if($db->getNumRows()) { // если товары найдены, то выводим на экран
         $basket = $db->getObject(); // результат запроса к базе сохраняем в переменной

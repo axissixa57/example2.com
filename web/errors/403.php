@@ -5,16 +5,20 @@ include '../../library/core.php';
 ?>
 <!DOCTYPE html>
 <html>
+
 <head>
+    <meta charset="utf-8">
     <title>Forbidden</title>
     <style type="text/css">
-        body,html{
+        body,
+        html {
             width: 100%;
             height: 100%;
             padding: 0;
             margin: 0;
         }
-        body{
+
+        body {
             background-color: #212121;
             display: flex;
             flex-direction: column;
@@ -27,16 +31,17 @@ include '../../library/core.php';
             box-sizing: border-box;
         }
 
-        .content{
+        .content {
             position: relative;
             display: inline-block;
         }
-
     </style>
 </head>
+
 <body>
-<div class="content">
-    <h1>403 Доступ запрещен</h1>
-</div>
+    <div class="content">
+        <h1>403 Доступ запрещен</h1>
+    </div>
 </body>
+
 </html>

@@ -14,6 +14,9 @@ if ($_GET && $GET['sort']) { // проверяем наличие парамет
         case 'date_order':
             $order = "`o`.`customer` $type";
             break;
+        case 'customer':
+            $order = "`o`.`customer` $type";
+            break;
         case 'summary':
             $order = "`summary` $type";
             break;
@@ -23,12 +26,12 @@ if ($_GET && $GET['sort']) { // проверяем наличие парамет
     }
 }
 // Выбираем список заказов с подсчетом суммы каждого заказа и количества товаров в корзине
-$db->setQuery("SELECT `o`.`id`, `o`.`customer`, `o`.`date_order`, `o`. `phone`,
+$db->setQuery("SELECT `o`.`id`, `o`.`customer`, `o`.`date_order`, `o`.`phone`,
                 SUM(`p`.`price` * `b`.`quantity`) AS `summary`, COUNT(`o`.`id`) AS `quantity`
                 FROM `orders` AS `o`
                 JOIN `basket` AS `b` ON `o`.`id` = `b`.`id_order`
                 JOIN `products` AS `p` ON `p`.`id` = `b`.`id_product`
-                GROUP BY `o`. `id`
+                GROUP BY `o`.`id`
                 ORDER BY $order"); // в переменную order передаем сортировку
 $orders = array(); // если заказов нет то у нас будет пустой массив
 if ($db->getNumRows()) { // есть ли запись?
@@ -41,8 +44,7 @@ file_include('/layers/header.php', 'Список заказов');
 
 <div class="content">
     <h1>Список заказов</h1>
-    <?php if ($orders) :
-        ?>
+    <?php if($orders): ?>
         <table class="simple-table">
             <tr>
                 <th>
@@ -50,11 +52,12 @@ file_include('/layers/header.php', 'Список заказов');
                         Номер заказа
                         <span class="sort">
                             <!-- Тот же адрес, но с параметром sort. В sort передаём название столбца для сортировки -->
-                            <a href="<?= url('/web/orders'); ?>?sort=id">
+                            <!-- ??????sort=id???? -->
+                            <a href="<?=url('/web/orders/'); ?>?sort=id">
                                 <div class="arrow-top"></div>
                             </a>
                             <!-- Тот же адрес, но с параметрами sort и type. В type передаём направление сортировки, если type не указан, то по умолчанию ASC -->
-                            <a href="<?= url('/web/orders/'); ?>?sort=id&type=desc">
+                            <a href="<?=url('/web/orders/'); ?>?sort=id&type=desc">
                                 <div class="arrow-bottom"></div>
                             </a>
                         </span>
@@ -64,10 +67,10 @@ file_include('/layers/header.php', 'Список заказов');
                     <span class="td-sort">
                         Дата заказа
                         <span class="sort">
-                            <a href="<?= url('web/orders/'); ?>?sort=date_order">
+                            <a href="<?=url('web/orders/'); ?>?sort=date_order">
                                 <div class="arrow-top"></div>
                             </a>
-                            <a href="<?= url('/web/orders/'); ?>?sort=date_order&type=desc">
+                            <a href="<?=url('/web/orders/'); ?>?sort=date_order&type=desc">
                                 <div class="arrow-bottom"></div>
                             </a>
                         </span>
@@ -77,7 +80,7 @@ file_include('/layers/header.php', 'Список заказов');
                     <span class="td-sort">
                         Клиент
                         <span class="sort">
-                            <a href="<?= url('web/orders/'); ?>?sort=customer">
+                            <a href="<?=url('web/orders/'); ?>?sort=customer">
                                 <div class="arrow-top"></div>
                             </a>
                             <a href="<?= url('/web/orders/'); ?>?sort=customer&type=desc">
@@ -91,10 +94,10 @@ file_include('/layers/header.php', 'Список заказов');
                     <span class="td-sort">
                         Сумма заказа
                         <span class="sort">
-                            <a href="<?= url('web/orders/'); ?>?sort=summary">
+                            <a href="<?=url('web/orders/'); ?>?sort=summary">
                                 <div class="arrow-top"></div>
                             </a>
-                            <a href="<?= url('/web/orders/'); ?>?sort=summary&type=desc">
+                            <a href="<?=url('/web/orders/'); ?>?sort=summary&type=desc">
                                 <div class="arrow-bottom"></div>
                             </a>
                         </span>
@@ -103,18 +106,17 @@ file_include('/layers/header.php', 'Список заказов');
                 <th class="td-sort">
                     <span>Товаров в корзине</span>
                     <div class="sort">
-                        <a href="<?= url('web/orders/'); ?>?sort=quantity">
+                        <a href="<?=url('web/orders/'); ?>?sort=quantity">
                             <div class="arrow-top"></div>
                         </a>
-                        <a href="<?= url('/web/orders/'); ?>?sort=quantity&type=desc">
+                        <a href="<?=url('/web/orders/'); ?>?sort=quantity&type=desc">
                             <div class="arrow-bottom"></div>
                         </a>
                     </div>
                 </th>
                 <th></th>
             </tr>
-            <?php foreach ($orders as $order) : 
-                ?>
+            <?php foreach($orders as $order): ?>
                 <tr>
                     <td><?= $order->id; ?></td>
                     <td><?= date('d.m.Y H:i:s', strtotime($order->date_order)); ?></td>
@@ -123,8 +125,8 @@ file_include('/layers/header.php', 'Список заказов');
                     <td><?= $order->summary; ?></td>
                     <td><?= $order->quantity; ?></td>
                     <td>
-                        <a href="<?= url('/web/orders/del.php?id=') . $order->id; ?>">
-                            <img width="24px" height="auto" src="<?= url('/assets/img/del.png') ?>" alt="Удалить заказ" title="Удалить заказ">
+                        <a href="<?=url('/web/orders/del.php?id=') . $order->id; ?>">
+                            <img width="24px" height="auto" src="<?=url('/assets/img/del.png'); ?>" alt="Удалить заказ" title="Удалить заказ">
                         </a>
                     </td>
                 </tr>

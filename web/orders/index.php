@@ -5,7 +5,7 @@ access(['admin']);
 file_include('/library/Db.php');
 $db = new Db();
 $order = '`o`.`date_order` DESC'; // сортировка по умолчанию
-if ($_GET && $GET['sort']) { // проверяем наличие параметра sort
+if ($_GET && $_GET['sort']) { // проверяем наличие параметра sort
     $type = $_GET['type'] ? 'DESC' : 'ASC'; // если передан параметр type, то DESC иначе ASC
     switch ($_GET['sort']) { // проверяем переданный параметр
         case 'id':
